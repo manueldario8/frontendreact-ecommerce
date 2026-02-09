@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./productlist.css";
+import { useNavigate } from "react-router-dom";
 
 type Product = {
     id: number;
@@ -17,11 +18,13 @@ type Filtros = {
 };
 
 
+
 const Productlist = () => {
     const [productos, setProductos] = useState<Product[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [orden, setOrden] = useState("Relevante");
-    const [filtros, setFiltros] = useState<Filtros>({categoria: [], tipo: []})
+    const [filtros, setFiltros] = useState<Filtros>({categoria: [], tipo: []});
+    const navigate = useNavigate();
 
     
     useEffect(()=>{
@@ -74,6 +77,10 @@ const Productlist = () => {
 
         return 0;
     });
+
+    const handelImageClick = (id:number) => {
+        navigate(`/producto/${id}`);
+    }
 
     
 
@@ -134,7 +141,7 @@ const Productlist = () => {
                 ): productosFiltrados.length > 0 ? (
                     productosOrdenados.map((producto) => (
                     <div className="product-card" key={producto.id}>
-                        <img src={producto.image} alt={producto.image} className="product-image"/>
+                        <img src={producto.image} alt={producto.image} className="product-image" onClick={() => handelImageClick(producto.id)} />
                         
                         <h3>{producto.nombre}</h3>
                         <p>${producto.precio}</p>
