@@ -95,9 +95,9 @@ const Cart = () => {
 
       <div className="cart-summary">
         <h2>TU <span>CARRITO</span></h2>
-        <p>Subtotal: <span></span></p>
-        <p>Envío: <span></span></p>
-        <p className="total">Total: <span></span></p>
+        <p>Subtotal: <span>${subTotal}</span></p>
+        <p>Envío: <span>${costoDeEnvío}</span></p>
+        <p className="total">Total: <span>${total}</span></p>
         <button className="checkout-btn">IR A PAGAR</button>
       </div>
 

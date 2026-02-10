@@ -1,9 +1,19 @@
 import Productlist from "../productlist/productlist";
 import "./home.css";
+import Search from "../search/search";
 
-const Home = () => {
+
+type HomeProps = {
+  buscarTermino: string;
+  onSearch: (termino: string) => void;
+};
+
+const Home = ({ buscarTermino, onSearch }: HomeProps) => {
     return(
-        <Productlist></Productlist>
+        <>
+        <Search onSearch={onSearch}></Search>
+        <Productlist buscarTermino={buscarTermino}></Productlist>
+        </>
     );
 };
 

@@ -1,7 +1,12 @@
 import "./navbar.css";
 import {Link} from 'react-router-dom';
+import { useCart } from "../cartcontext/cartcontext";
 
 const Navbar = () => {
+
+    const {carrito} = useCart();
+    const totalProductos = carrito.reduce((acc,producto) => acc + producto.cantidad, 0);
+
   return (
     <section className='header'>
         <h1 className='logo'>TIEN<span>DA</span></h1>
@@ -14,7 +19,7 @@ const Navbar = () => {
             <button className='search-button'><i className='fas fa-search'></i></button>
             <Link to="/carrito" className="icon-button">
             <i className='fas fa-shopping-cart'></i>
-            <span className='counter'>0</span>
+            <span className='counter'>{totalProductos}</span>
             </Link>
         </div>
     </section>

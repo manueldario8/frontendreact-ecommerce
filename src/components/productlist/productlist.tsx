@@ -17,14 +17,18 @@ type Filtros = {
     tipo: string[];
 };
 
+type ProductListProps = {
+  buscarTermino: string;
+};
 
 
-const Productlist = () => {
+const Productlist = ({ buscarTermino }: ProductListProps) => {
     const [productos, setProductos] = useState<Product[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [orden, setOrden] = useState("Relevante");
     const [filtros, setFiltros] = useState<Filtros>({categoria: [], tipo: []});
     const navigate = useNavigate();
+  
 
     
     useEffect(()=>{
@@ -59,7 +63,10 @@ const Productlist = () => {
     const productosFiltrados = productos.filter((producto) => {
         const matchCategoria = filtros.categoria.length === 0 || filtros.categoria.includes(producto.categoria);
         const matchTipo = filtros.tipo.length === 0 || filtros.tipo.includes(producto.tipo);
-        return matchCategoria && matchTipo;
+        const matchBusqueda = buscarTermino === "" || producto.nombre.toLowerCase().includes(buscarTermino.toLowerCase());
+
+
+        return matchCategoria && matchTipo && matchBusqueda;
     })
 
 
@@ -81,10 +88,6 @@ const Productlist = () => {
     const handelImageClick = (id:number) => {
         navigate(`/producto/${id}`);
     }
-
-    
-
-
 
   return (
     <section className="main-content">
